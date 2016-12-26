@@ -14,6 +14,7 @@ h = sigmoid(X * theta);
 
 J = 1 / m * (-y' * log(h) - (1 - y)' * log(1 - h)) + lambda / (2 * m) * sum(theta.* theta);
 grad = 1 / m * sum(X.* repmat((h - y), 1, size(X ,2)));
+grad(:,2:length(grad)) = grad(:,2:length(grad)) + lambda / m * theta(2:length(theta))';
 
 % =============================================================
 

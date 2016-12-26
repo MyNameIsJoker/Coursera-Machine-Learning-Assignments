@@ -38,10 +38,15 @@ fprintf('Cost at initial theta (zeros): %f\n', cost);
 %% ============= Part 2: Regularization and Accuracies =============
 
 options = optimset('GradObj', 'on', 'MaxIter', 400);
-lambda = 1;
+lambda = 100;
 [theta, cost] =  fminunc...
     (@(t)(costFunctionReg(t, X, y, lambda)), initial_theta, options);
 % Plot Boundary
 plotDecisionBoundary(theta, X, y);
 hold on;
 title(sprintf('lambda = %g', lambda))
+
+% Compute accuracy on our training set
+p = predict(theta, X);
+
+fprintf('Train Accuracy: %f\n', mean(double(p == y)) * 100);
